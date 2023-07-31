@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 Web Server Time</title>
+  <script>
+    function updateTime() {
+      fetch('/time') // Gửi yêu cầu GET để lấy thời gian từ máy chủ
+        .then(response => response.json()) // Phân tích cú pháp JSON
+        .then(data => {
+          // Cập nhật thời gian trên trang web
+          document.getElementById('currentTime').innerText = data.currentTime;
+        })
+        .catch(error => console.error('Error fetching time:', error));
+    }
+
+    // Cập nhật thời gian mỗi 5 giây
+    setInterval(updateTime, 5000);
+  </script>
+</head>
+<body>
+  <h1>Xin chào từ ESP32 Web Server!</h1>
+  <p>Thời gian hiện tại: <span id="currentTime"></span></p>
+</body>
+</html>
